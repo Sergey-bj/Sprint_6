@@ -1,58 +1,46 @@
+import allure
+import pytest
 from pages.order_page import OrderPage
-from locators.order_page_locators import OrderPageLocators
-from locators.main_page_locators import MainPageLocators
-from locators.header_page_locators import HeaderPageLocators
 
+@allure.story('Тест создания заказов')
 class TestOrderPage:
-
-    def test_check_order_successfull_v1(self, driver):
-
-        name = 'Сергей'
-        lastname = 'Петров'
-        address = 'Москва'
-        station = 'Черкизовская'
-        phone = '89998887766'
-        date = '28.09.2024'
-
+    @allure.title('Проверка создания заказа через кнопку "Заказать" в хэдере')
+    @pytest.mark.parametrize('name, surname, address, number, comment',
+                             [('Иван', 'Иванов', 'Москва', '89997773313', 'ТЕСТ')])
+    def test_create_order_from_header_button_positive(self, driver, name, surname, address, number, comment):
         order_page = OrderPage(driver)
-        order_page.go_to_order_form(HeaderPageLocators.BASE_PAGE_HEADER_ORDER_BUTTON)
-        order_page.set_order_personal(OrderPageLocators.ORDER_PAGE_NAME_INPUT, name,
-                                      OrderPageLocators.ORDER_PAGE_SURNAME_INPUT, lastname,
-                                      OrderPageLocators.ORDER_PAGE_ADDRESS_INPUT, address,
-                                      OrderPageLocators.ORDER_PAGE_METRO_STATION_CLICK, station,
-                                      OrderPageLocators.ORDER_PAGE_METRO_STATION_SELECT,
-                                      OrderPageLocators.ORDER_PAGE_PHONE_NUMBER_INPUT, phone)
-        order_page.click_button_next(OrderPageLocators.ORDER_PAGE_INPUT_BUTTON)
-        order_page.set_order_data(OrderPageLocators.ORDER_PAGE_DATE_CLICK, date,
-                                  OrderPageLocators.ORDER_PAGE_DATE_SELECT,
-                                  OrderPageLocators.ORDER_PAGE_DATE_RENTAL_CLICK,
-                                  OrderPageLocators.ORDER_PAGE_DATE_RENTAL_SELECT)
-        order_page.click_button_order(OrderPageLocators.ORDER_PAGE_ORDER_BUTTON)
-        order_page.click_button_order_yes(OrderPageLocators.ORDER_PAGE_MODAL_WINDOW_ORDER_BUTTON)
-        assert order_page.check_order(OrderPageLocators.ORDER_PAGE_SUCCESSFULL_MODAL_WINDOW_BUTTON) == 'Посмотреть статус'
+        order_page.click_order_button_from_header()
+        order_page.input_name(name)
+        order_page.input_surname(surname)
+        order_page.input_address(address)
+        order_page.select_metro()
+        order_page.enter_phone_field(number)
+        order_page.click_next_button()
+        order_page.select_date()
+        order_page.select_period()
+        order_page.click_on_grey_checkbox()
+        order_page.enter_comment_field(comment)
+        order_page.click_order_button()
+        order_page.click_yes_in_popup()
+        assert order_page.get_text_from_button_in_popup() == 'Посмотреть статус'
 
-    def test_check_order_successfull_v2(self, driver):
-
-        name = 'Иван'
-        lastname = 'Тестов'
-        address = 'Пушкино'
-        station = 'Парк культуры'
-        phone = '89998882211'
-        date = '30.09.2024'
-
+    @allure.title('Проверка создания заказа через кнопку "Заказать" внизу страницы')
+    @pytest.mark.parametrize('name, surname, address, number, comment',
+                             [('Тест', 'Тестович', 'Питер', '89661112233', 'Тестовая')])
+    def test_create_order_from_down_button_positive(self, driver, name, surname, address, number, comment):
         order_page = OrderPage(driver)
-        order_page.scroll_to_button_order(MainPageLocators.HOME_PAGE_ORDER_BUTTON)
-        order_page.set_order_personal(OrderPageLocators.ORDER_PAGE_NAME_INPUT, name,
-                                      OrderPageLocators.ORDER_PAGE_SURNAME_INPUT, lastname,
-                                      OrderPageLocators.ORDER_PAGE_ADDRESS_INPUT, address,
-                                      OrderPageLocators.ORDER_PAGE_METRO_STATION_CLICK, station,
-                                      OrderPageLocators.ORDER_PAGE_METRO_STATION_SELECT_V2,
-                                      OrderPageLocators.ORDER_PAGE_PHONE_NUMBER_INPUT, phone)
-        order_page.click_button_next(OrderPageLocators.ORDER_PAGE_INPUT_BUTTON)
-        order_page.set_order_data(OrderPageLocators.ORDER_PAGE_DATE_CLICK, date,
-                                  OrderPageLocators.ORDER_PAGE_DATE_SELECT_V2,
-                                  OrderPageLocators.ORDER_PAGE_DATE_RENTAL_CLICK,
-                                  OrderPageLocators.ORDER_PAGE_DATE_RENTAL_SELECT_V2)
-        order_page.click_button_order(OrderPageLocators.ORDER_PAGE_ORDER_BUTTON)
-        order_page.click_button_order_yes(OrderPageLocators.ORDER_PAGE_MODAL_WINDOW_ORDER_BUTTON)
-        assert order_page.check_order(OrderPageLocators.ORDER_PAGE_SUCCESSFULL_MODAL_WINDOW_BUTTON) == 'Посмотреть статус'
+        order_page.click_button_cookie()
+        order_page.click_order_button_from_down_page()
+        order_page.input_name(name)
+        order_page.input_surname(surname)
+        order_page.input_address(address)
+        order_page.select_metro()
+        order_page.enter_phone_field(number)
+        order_page.click_next_button()
+        order_page.select_date()
+        order_page.select_period()
+        order_page.click_on_grey_checkbox()
+        order_page.enter_comment_field(comment)
+        order_page.click_order_button()
+        order_page.click_yes_in_popup()
+        assert order_page.get_text_from_button_in_popup() == 'Посмотреть статус'

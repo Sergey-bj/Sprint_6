@@ -1,16 +1,22 @@
+import allure
+from pages.dzen_page import DzenPage
 from pages.header_page import HeaderPage
-from locators.header_page_locators import HeaderPageLocators
-from locators.main_page_locators import MainPageLocators
 
+
+@allure.story('Тест перехода по клику на лого')
 class TestHeaderPage:
-    def test_click_to_logo_yandex(self, driver):
-        header_page = HeaderPage(driver)
-        header_page.click_to_logo(HeaderPageLocators.BASE_PAGE_HEADER_LOGO_YANDEX)
-        header_page.switch_to()
-        assert header_page.check_element(HeaderPageLocators.DZEN_PAGE_BUTTON) == 'Новости'
 
-    def test_click_to_logo_scooter(self, driver):
+    @allure.title('Проверка клика на логотип "Самоката"')
+    def test_click_logo_successful(self, driver):
         header_page = HeaderPage(driver)
-        header_page.click_header_order_button(HeaderPageLocators.BASE_PAGE_HEADER_ORDER_BUTTON)
-        header_page.click_to_logo(HeaderPageLocators.BASE_PAGE_HEADER_LOGO_SCOOTER)
-        assert header_page.check_element(MainPageLocators.HOME_PAGE_ORDER_BUTTON) == 'Заказать'
+        header_page.click_order_button_from_header()
+        header_page.click_to_samokat_logo()
+        assert driver.current_url == 'https://qa-scooter.praktikum-services.ru/'
+
+    @allure.title('Проверка клика на логотип "Яндекс"')
+    def test_click_yandex_logo(self, driver):
+        header_page = HeaderPage(driver)
+        header_page.click_to_yandex_logo()
+        dzen_page = DzenPage(driver)
+        text_from_card = dzen_page.get_elements_news()
+        assert any('Новости' in item for item in text_from_card)

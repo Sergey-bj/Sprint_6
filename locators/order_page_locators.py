@@ -18,12 +18,15 @@ class OrderPageLocators:
 
     # ORDER_SERVICE_DATA_FORM_PAGE
     ORDER_PAGE_DATE_CLICK = By.XPATH, ".//input[@placeholder = '* Когда привезти самокат']"   # Поле "* Когда привезти самокат"
-    ORDER_PAGE_DATE_SELECT = By.XPATH, ".//div[@aria-label='Choose суббота, 28-е сентября 2024 г.']"    # Найти элемент
+    ORDER_PAGE_DATE_SELECT = By.XPATH, ".//div[@aria-label='Choose четверг, 28-е марта 2024 г.']"    # Найти элемент
     ORDER_PAGE_DATE_SELECT_V2 = By.XPATH, ".//div[@aria-label='Choose понедельник, 30-е сентября 2024 г.']"   # Найти элемент
 
     ORDER_PAGE_DATE_RENTAL_CLICK = By.XPATH, ".//div[@class='Dropdown-placeholder' and text()='* Срок аренды']"  # Поле Срок аренды
     ORDER_PAGE_DATE_RENTAL_SELECT = By.XPATH, ".//div[@class='Dropdown-option' and text()='сутки']"    # Найти элемент сутки
     ORDER_PAGE_DATE_RENTAL_SELECT_V2 = By.XPATH, ".//div[@class='Dropdown-option' and text()='двое суток']"  # Найти элемент двое суток
+
+    ORDER_PAGE_GREY_CHECK_BOX = By.XPATH, "//input[@id='grey']" # Выбор чекбокс
+    ORDER_PAGE_INPUT_COMMENT = By.XPATH, "//input[@placeholder='Комментарий для курьера']"
 
     ORDER_PAGE_DROPDOWN_CONTROL_INPUT = By.XPATH, ".//div[@class='Dropdown-placeholder' and text()='* Срок аренды']"   # Поле "Срок аренды"
     ORDER_PAGE_DROPDOWN_CONTROL = By.XPATH, ".//div[@class='Dropdown-option is-selected' and text()='сутки']"  # Выбор Срока аренды

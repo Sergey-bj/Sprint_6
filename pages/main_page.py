@@ -1,26 +1,42 @@
-from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.wait import WebDriverWait
+from locators.main_page_locators import MainPageLocators
 from pages.base_page import BasePage
+import allure
 
+@allure.suite('Проверка блока "Вопросы о важном"')
 class MainPage(BasePage):
 
-    def button_order(self, locator):
-        self.click_to_element(locator)
+    pointer0 = MainPageLocators.QUESTION0
+    pointer1 = MainPageLocators.QUESTION1
+    pointer2 = MainPageLocators.QUESTION2
+    pointer3 = MainPageLocators.QUESTION3
+    pointer4 = MainPageLocators.QUESTION4
+    pointer5 = MainPageLocators.QUESTION5
+    pointer6 = MainPageLocators.QUESTION6
+    pointer7 = MainPageLocators.QUESTION7
+    text0 = MainPageLocators.ANSWER0
+    text1 = MainPageLocators.ANSWER1
+    text2 = MainPageLocators.ANSWER2
+    text3 = MainPageLocators.ANSWER3
+    text4 = MainPageLocators.ANSWER4
+    text5 = MainPageLocators.ANSWER5
+    text6 = MainPageLocators.ANSWER6
+    text7 = MainPageLocators.ANSWER7
+    button_cookie = MainPageLocators.MAIN_PAGE_BUTTON_COOKIE
 
-    def click_to_question(self, locator):
-        self.find_element_with_wait(locator).click()
+    @allure.step('Клик на кнопку принятия куки')
+    def click_button_cookie(self):
+        self.click_to_element(self.button_cookie)
 
-    def get_text_from_answer(self, locator):
-        return self.get_text_from_element(locator)
+    @allure.step('Скролл до стрелки')
+    def scroll_to_pointer(self):
+        self.scroll_into_view(self.pointer7)
 
-    def get_answer_text(self, locator_q, locator_a, num):
-        locator_q_formatted = self.format_locators(locator_q, num)
-        locator_a_formatted = self.format_locators(locator_a, num)
-        WebDriverWait(self.driver, 10).until(expected_conditions.element_to_be_clickable(locator_q_formatted))
-        self.click_to_question(locator_q_formatted)
-        WebDriverWait(self.driver, 10).until(expected_conditions.element_to_be_clickable(locator_a_formatted))
-        return self.get_text_from_answer(locator_a_formatted)
+    @allure.step('Клик по стрелке')
+    def click_pointer(self, pointer_index):
+        pointer_locator = getattr(self, f'pointer{pointer_index}')
+        self.click_to_element(pointer_locator)
 
-    def scroll_to_button_order(self, locator):
-        element = WebDriverWait(self.driver, 10).until(expected_conditions.element_to_be_clickable(locator))
-        self.driver.execute_script("arguments[0].scrollIntoView();", element)
+    @allure.step('Получить текст ответа')
+    def get_text_under_pointer(self, pointer_index):
+        text_locator = getattr(self, f'text{pointer_index}')
+        return self.get_text_from_element(text_locator)
