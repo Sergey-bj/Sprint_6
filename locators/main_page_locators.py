@@ -3,11 +3,11 @@ from selenium.webdriver.common.by import By
 class MainPageLocators:
 
     # #ORDER_BUTTON
-    MAIN_PAGE_ORDER_BUTTON = By.XPATH, "//button[@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Заказать']"   #  Кнопка "Заказать" внизу страницы
+    MAIN_PAGE_ORDER_BUTTON = By.XPATH, "//button[@class='Button_Button__ra12g Button_UltraBig__UU3Lp' and text()='Заказать']"   #  Кнопка "Заказать" внизу страницы
 
     # Вопросы о важном
     QUESTION0 = By.XPATH, "//div[@id='accordion__heading-0']"
-    QUESTION1 = By.XPATH, "// div[ @ id = 'accordion__heading-1']"
+    QUESTION1 = By.XPATH, "//div[@id='accordion__heading-1']"
     QUESTION2 = By.XPATH, "//div[@id='accordion__heading-2']"
     QUESTION3 = By.XPATH, "//div[@id='accordion__heading-3']"
     QUESTION4 = By.XPATH, "//div[@id='accordion__heading-4']"
@@ -17,7 +17,7 @@ class MainPageLocators:
 
     # Ответы
     ANSWER0 = By.XPATH, "//p[contains(text(),'Сутки — 400 рублей. Оплата курьеру — наличными или')]"
-    ANSWER1 = By.XPATH,"//p[contains(text(),'Пока что у нас так: один заказ — один самокат. Есл')]"
+    ANSWER1 = By.XPATH, "//p[contains(text(),'Пока что у нас так: один заказ — один самокат. Есл')]"
     ANSWER2 = By.XPATH, "//p[contains(text(),'Допустим, вы оформляете заказ на 8 мая. Мы привози')]"
     ANSWER3 = By.XPATH, "//p[contains(text(),'Только начиная с завтрашнего дня. Но скоро станем ')]"
     ANSWER4 = By.XPATH, "//p[contains(text(),'Пока что нет! Но если что-то срочное — всегда можн')]"

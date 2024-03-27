@@ -30,7 +30,6 @@ class OrderPage(BasePage):
     choose30September = OrderPageLocators.ORDER_PAGE_DATE_SELECT_V2
     choose1days = OrderPageLocators.ORDER_PAGE_DATE_RENTAL_SELECT
     choose2days = OrderPageLocators.ORDER_PAGE_DATE_RENTAL_SELECT_V2
-    buttonOrderDown = MainPageLocators.MAIN_PAGE_ORDER_BUTTON
     button_cookie = MainPageLocators.MAIN_PAGE_BUTTON_COOKIE
 
 
@@ -40,7 +39,7 @@ class OrderPage(BasePage):
 
     @allure.step('Клик на кнопку "Заказать" в нижней части страницы')
     def click_order_button_from_down_page(self):
-        self.click_to_element(self.buttonOrderDown)
+        self.click_to_element(self.buttonOrderDownPage)
 
     @allure.step('Ввод имени')
     def input_name(self, name):
