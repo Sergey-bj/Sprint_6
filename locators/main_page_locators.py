@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 class MainPageLocators:
 
     # #ORDER_BUTTON
-    MAIN_PAGE_ORDER_BUTTON = By.XPATH, "//button[@class='Button_Button__ra12g Button_UltraBig__UU3Lp' and text()='Заказать']"   #  Кнопка "Заказать" внизу страницы
+    MAIN_PAGE_ORDER_BUTTON = By.XPATH, "//button[@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Заказать']"   #  Кнопка "Заказать" внизу страницы
 
     # Вопросы о важном
     QUESTION0 = By.XPATH, "//div[@id='accordion__heading-0']"
@@ -27,3 +27,5 @@ class MainPageLocators:
 
     #Button_COOKIE
     MAIN_PAGE_BUTTON_COOKIE = By.ID, "rcc-confirm-button"
+
+    MAIN_PAGE_NONE_DISPLAY_ELEMENT = By.XPATH, '//img[@src="/assets/scooter.png"]'

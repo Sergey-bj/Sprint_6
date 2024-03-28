@@ -2,6 +2,7 @@ from locators.main_page_locators import MainPageLocators
 from pages.base_page import BasePage
 import allure
 
+
 @allure.suite('Проверка блока "Вопросы о важном"')
 class MainPage(BasePage):
 
@@ -22,10 +23,16 @@ class MainPage(BasePage):
     text6 = MainPageLocators.ANSWER6
     text7 = MainPageLocators.ANSWER7
     button_cookie = MainPageLocators.MAIN_PAGE_BUTTON_COOKIE
+    display_img = MainPageLocators.MAIN_PAGE_NONE_DISPLAY_ELEMENT
+
 
     @allure.step('Клик на кнопку принятия куки')
     def click_button_cookie(self):
         self.click_to_element(self.button_cookie)
+
+    @allure.step('Скрыть картинку "Самокат"')
+    def none_display_img(self):
+        self.none_display(self.display_img)
 
     @allure.step('Скролл до стрелки')
     def scroll_to_pointer(self):

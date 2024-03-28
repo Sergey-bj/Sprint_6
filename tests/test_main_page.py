@@ -19,5 +19,6 @@ class TestMainPage:
         main_page = MainPage(driver)
         main_page.click_button_cookie()
         main_page.scroll_to_pointer()
+        main_page.none_display_img()
         main_page.click_pointer(pointer_index)
         assert expected_text in main_page.get_text_under_pointer(pointer_index)
